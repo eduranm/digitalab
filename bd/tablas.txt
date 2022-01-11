@@ -1,0 +1,62 @@
+create table tipo_informacion(
+id_tipo_info int NOT NULL AUTO_INCREMENT, 
+nombre_tipo_info varchar(100), 
+PRIMARY KEY (id_tipo_info));
+
+insert into tipo_informacion(nombre_tipo_info) values('Consultas');
+insert into tipo_informacion(nombre_tipo_info) values('Descargas');
+
+create table area_conocimiento(
+id_area int NOT NULL AUTO_INCREMENT, 
+nombre_area varchar(200), 
+PRIMARY KEY (id_area));
+
+insert into area_conocimiento(nombre_area) values('Ciencias Físico, Matemáticas e Ingeniería');
+insert into area_conocimiento(nombre_area) values('Ciencias Biológicas, Químicas y de la Salud');
+insert into area_conocimiento(nombre_area) values('Ciencias Sociales');
+insert into area_conocimiento(nombre_area) values('Artes y Humanidades');
+insert into area_conocimiento(nombre_area) values('Multidisciplinarias');
+
+create table  recurso_electronico(
+id_recurso int NOT NULL AUTO_INCREMENT, 
+nombre_recurso varchar(200), 
+PRIMARY KEY(id_recurso));
+
+insert into recurso_electronico(nombre_recurso) values('Revistas');
+insert into recurso_electronico(nombre_recurso) values('Bases de datos');
+insert into recurso_electronico(nombre_recurso) values('Libros');
+
+create table  fuente_informacion(
+id_fuente int NOT NULL AUTO_INCREMENT, 
+nombre_fuente varchar(500) NOT NULL, 
+acronimo varchar(100) NOT NULL, 
+id_recurso int NOT NULL, 
+id_area int NOT NULL, 
+PRIMARY KEY(id_fuente), 
+FOREIGN KEY(id_recurso) REFERENCES recurso_electronico(id_recurso), 
+FOREIGN KEY(id_area) REFERENCES area_conocimiento(id_area));
+
+CREATE UNIQUE INDEX IDX_FUENTE1 ON fuente_informacion(nombre_fuente,acronimo,id_recurso,id_area);
+
+create table valores(
+anio int, 
+id_tipo_info int, 
+id_fuente int, 
+m1 bigint, 
+m2 bigint, 
+m3 bigint, 
+m4 bigint, 
+m5 bigint, 
+m6 bigint, 
+m7 bigint, 
+m8 bigint, 
+m9 bigint, 
+m10 bigint, 
+m11 bigint, 
+m12 bigint, 
+PRIMARY KEY(anio,id_tipo_info,id_fuente), 
+FOREIGN KEY(id_tipo_info) REFERENCES tipo_informacion(id_tipo_info), 
+FOREIGN KEY(id_fuente) REFERENCES fuente_informacion(id_fuente));
+
+
+create view vb_cons_des_total as select t.id_tipo_info, t.id_recurso, t.anio, sum(t.suma) total from (select v.id_tipo_info, (v.m1+v.m2+v.m3+v.m4+v.m5+v.m6+v.m7+v.m8+v.m9+v.m10+v.m11+v.m12) suma, v.anio, fi.id_recurso from fuente_informacion fi inner join valores v on fi.id_fuente=v.id_fuente) t group by t.id_tipo_info, t.id_recurso, t.anio;

@@ -1,0 +1,1 @@
+ alter table fuente_informacion AUTO_INCREMENT=1;

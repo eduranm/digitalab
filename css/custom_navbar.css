@@ -1,0 +1,48 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/08/2020, 09:45:23 PM
+    Author     : Edgar
+*/
+.navbar .navbar-brand-wrapper .navbar-brand,
+.navbar .navbar-brand-wrapper .navbar-brand:active,
+.navbar .navbar-brand-wrapper .navbar-brand:focus,
+.navbar .navbar-brand-wrapper .navbar-brand:hover{
+    color : #31ce3c;
+}
+
+.navbar .navbar-brand-wrapper .navbar-brand img {
+    /* width: calc(240px - 120px); */
+    width: 200px !important;
+    max-width: none !important;
+    height: 60px;
+    margin: auto;
+    vertical-align: middle;
+}
+
+.navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini img {
+    width: 50px !important;
+    max-width: none !important;
+    height: 50px;
+    margin: auto;
+    display: inline;
+}
+
+.select2-results__group{
+    background: lightgray;
+}
+
+#div_area .select2-selection__choice{
+    background: #1bdbe0;
+}
+
+#div_tipo .select2-selection__choice{
+    background: #1bdbe0;
+}
+
+#div_informacion .select2-selection__choice{
+    background: #1bdbe0;
+}
